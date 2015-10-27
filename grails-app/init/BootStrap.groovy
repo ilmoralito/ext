@@ -28,8 +28,13 @@ class BootStrap {
     def keyra = new Worker(fullName: "Keyra Caballero", email: "keyra.caballero@ucc.edu.ni").save failOnError: true
     def nelvar = new Worker(fullName: "Nelvar Valladares", email: "nelvar.valladares@ucc.edu.ni").save failOnError: true
     def yesennia = new Worker(fullName: "Yessenia Valverde", email: "yessenia.valverde@ucc.edu.ni").save failOnError: true
+    def norma = new Worker(fullName:"Norma Lazo", email: "norma.lazo@ucc.edu.ni").save failOnError: true
+    def marcia = new Worker(fullName:"Marcia Sandino", email: "marcia.sandino@ucc.edu.ni").save failOnError: true
+    def grethel = new Worker(fullName:"Grethel Hernandez", email: "grethel.hernandez@ucc.edu.ni").save failOnError: true
+    def rider = new Worker(fullName:"Rider Sarria", email: "rider.sarria@ucc.edu.ni").save failOnError: true
+    def leonte = new Worker(fullName:"Leonte Paiz", email: "leonte.paiz@ucc.edu.ni").save failOnError: true
 
-    assert Worker.count() == 12
+    assert Worker.count() == 17
 
     //departments
     def bodega = new Department(name: "Bodega", extensionNumber: 158).save failOnError: true
@@ -40,8 +45,9 @@ class BootStrap {
     def charge = new Department(name: "Cartera y cobro", extensionNumber: 119).save failOnError: true
     def fese = new Department(name: "FESE", extensionNumber: 115).save failOnError: true
     def industrial = new Department(name: "Industrial", extensionNumber: 115).save failOnError: true
+    def registro = new Department(name: "Registro", extensionNumber: 199).save failOnError: true
 
-    assert Department.count() == 8
+    assert Department.count() == 9
 
     //WorkerDepartment
     def wd1 = new WorkerDepartment(worker: arnoldo, department: bodega, position: "Manager").save failOnError: true
@@ -56,8 +62,13 @@ class BootStrap {
     def wd10 = new WorkerDepartment(worker: keyra, department: fese, position: "Collaborator").save failOnError: true
     def wd11 = new WorkerDepartment(worker: nelvar, department: industrial, position: "Manager").save failOnError: true
     def wd12 = new WorkerDepartment(worker: yesennia, department: industrial, position: "Collaborator").save failOnError: true
+    def wd13 = new WorkerDepartment(worker: norma, department: registro, position: "Manager").save failOnError: true
+    def wd14 = new WorkerDepartment(worker: marcia, department: registro, position: "Collaborator").save failOnError: true
+    def wd15 = new WorkerDepartment(worker: grethel, department: registro, position: "Collaborator").save failOnError: true
+    def wd16 = new WorkerDepartment(worker: rider, department: registro, position: "Collaborator").save failOnError: true
+    def wd17 = new WorkerDepartment(worker: leonte, department: registro, position: "Collaborator").save failOnError: true
 
-    assert WorkerDepartment.count() == 12
+    assert WorkerDepartment.count() == 17
   }
   def destroy = {
   }
