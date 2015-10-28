@@ -23,7 +23,6 @@ class WorkerDepartmentController {
 
   }
 
-  @Secured("ROLE_ADMIN")
   def printExtencionsList() {
     def data =  workerDepartmentService.getWorkerDepartmentData()
     def emergencyNumbers = grailsApplication.config.ni.edu.uccleon.emergencyNumbers
