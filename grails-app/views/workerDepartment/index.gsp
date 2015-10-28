@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="layout" content="public">
-    <title>Extenciones</title>
+    <title>Extensiones</title>
   </head>
   <body>
     <h1 style="text-align: center;">Directorio de extensiones</h1>
