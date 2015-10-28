@@ -7,8 +7,7 @@ class UrlMappings {
       }
     }
 
-    "/"(controller: "workerDepartments", action: "index")
-    //"/"(controller:"request", action:"activity")
+    "/"(controller: "workerDepartment", action: "index")
     "500"(view:'/error')
     "404"(view:'/notFound')
   }
