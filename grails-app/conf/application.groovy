@@ -19,7 +19,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 //app config
-
 ni.edu.uccleon.emergencyNumbers = [
 	redCross: "129",
 	police: "126",

@@ -8,7 +8,8 @@ class WorkerDepartmentController {
 
   static allowedMethods = [
     index: "GET",
-    create: ["GET", "POST"]
+    create: ["GET", "POST"],
+    printExtencionsList: "GET"
   ]
 
   def index() {
