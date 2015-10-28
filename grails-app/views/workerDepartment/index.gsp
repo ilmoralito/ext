@@ -6,7 +6,7 @@
     <title>Extenciones</title>
   </head>
   <body>
-    <h1 style="text-align: center;">Extenciones</h1>
+    <h1 style="text-align: center;">Directorio de extensiones</h1>
 
     <table class="table table-bordered table-hover">
       <colgroup>
@@ -17,7 +17,7 @@
       </colgroup>
       <thead>
         <tr>
-          <th style="text-align: center;">Extencion</th>
+          <th style="text-align: center;">Extension</th>
           <th>Departamento</th>
           <th>Responsable</th>
           <th>Colaboradores</th>
