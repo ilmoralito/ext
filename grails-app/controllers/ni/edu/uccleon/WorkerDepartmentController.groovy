@@ -12,27 +12,10 @@ class WorkerDepartmentController {
   ]
 
   def index() {
-    def criteria = WorkerDepartment.createCriteria()
-    def result = criteria.list {
-      projections {
-        groupProperty "department"
-      }
-    }
-
-    def data = result.groupBy { it.extensionNumber }.collect { o ->
-      [
-        ext: o.key,
-        meta: o.value.collect { d ->
-          [
-            department: d,
-            manager: workerDepartmentService.getWorkers("Manager", d),
-            collaborators: workerDepartmentService.getWorkers("Collaborator", d)
-          ]
-        }
-      ]
-    }
-
-    [data: data]
+    [
+      data: workerDepartmentService.getWorkerDepartmentData(),
+      emergencyNumbers: grailsApplication.config.ni.edu.uccleon.emergencyNumbers
+    ]
   }
 
   @Secured("ROLE_ADMIN")
