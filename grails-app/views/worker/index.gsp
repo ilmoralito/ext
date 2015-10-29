@@ -23,7 +23,7 @@
               </g:link>
             </td>
             <td>
-              <g:link action="delete">
+              <g:link action="delete" id="${worker.id}">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               </g:link>
             </td>
