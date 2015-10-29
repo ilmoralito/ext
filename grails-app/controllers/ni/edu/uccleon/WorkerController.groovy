@@ -7,7 +7,9 @@ class WorkerController {
   static allowedMethods = [
     index: "GET",
     create: ["GET", "POST"],
-    delete: ["GET", "POST"]
+    delete: ["GET", "POST"],
+    edit: "GET",
+    update: "POST"
   ]
 
   def index() {
@@ -45,5 +47,32 @@ class WorkerController {
     }
 
     [worker: worker]
+  }
+
+  def edit(Integer id) {
+    def worker = Worker.get id
+
+    if (!worker) {
+      response.sendError 404
+    }
+
+    [worker: worker]
+  }
+
+  def update(Integer id) {
+    def worker = Worker.get id
+
+    if (!worker) {
+      response.sendError 404
+    }
+
+    worker.properties = params
+
+    if (!worker.save()) {
+      chain action: "edit", id: id, model: [worker: worker]
+      return
+    }
+
+    redirect action: "edit", params: [id: id]
   }
 }
