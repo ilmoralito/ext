@@ -1,6 +1,11 @@
 package ni.edu.uccleon
 
+import org.grails.databinding.BindUsing
+
 class Worker {
+  @BindUsing({
+    obj, source -> source["fullName"]?.toLowerCase()?.tokenize(" ")*.capitalize().join(" ")
+  })
   String fullName
   String email
 
