@@ -46,8 +46,10 @@ class BootStrap {
     def fese = new Department(name: "FESE", extensionNumber: 115).save failOnError: true
     def industrial = new Department(name: "Industrial", extensionNumber: 115).save failOnError: true
     def registro = new Department(name: "Registro", extensionNumber: 199).save failOnError: true
+    def biblioteca = new Department(name: "Biblioteca", extensionNumber: 16).save failOnError: true
+    def vidaEstudiantil = new Department(name: "Vida estudiantil", extensionNumber: 188).save failOnError: true
 
-    assert Department.count() == 9
+    assert Department.count() == 11
 
     //WorkerDepartment
     def wd1 = new WorkerDepartment(worker: arnoldo, department: bodega, position: "Manager").save failOnError: true

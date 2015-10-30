@@ -6,10 +6,12 @@ import com.craigburke.document.builder.PdfDocumentBuilder
 class WorkerDepartmentController {
   def workerDepartmentService
 
+  static defaultAction = "list"
   static allowedMethods = [
     index: "GET",
     create: ["GET", "POST"],
-    printExtencionsList: "GET"
+    printExtencionsList: "GET",
+    list: "GET"
   ]
 
   def index() {
@@ -20,9 +22,33 @@ class WorkerDepartmentController {
   }
 
   @Secured("ROLE_ADMIN")
+  def list() {
+    def departments = Department.list().sort { it.name }
+    def data = WorkerDepartment.list().groupBy { it.department }
+
+    [departments: departments, data: data]
+  }
+
+  @Secured("ROLE_ADMIN")
   def create() {
 
   }
+
+  @Secured("ROLE_ADMIN")
+  def edit(Integer id) {
+    
+  }
+
+  @Secured("ROLE_ADMIN")
+  def update(Integer id) {
+    
+  }
+
+  @Secured("ROLE_ADMIN")
+  def delete(Integer id) {
+    
+  }
+
 
   def printExtencionsList() {
     def data =  workerDepartmentService.getWorkerDepartmentData()
