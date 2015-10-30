@@ -13,7 +13,7 @@ class WorkerController {
   ]
 
   def index() {
-    [workers: Worker.list()]
+    respond Worker.list()
   }
 
   def create() {

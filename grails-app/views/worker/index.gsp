@@ -2,7 +2,6 @@
   <head>
     <title>Worker</title>
   </head>
-
   <content tag="main">
     <g:link controller="control" class="btn btn-default">Regresar</g:link>
     <g:link action="create" class="btn btn-primary pull-right">Agregar trabajador</g:link>
@@ -15,7 +14,7 @@
         </tr>
       </thead>
       <tbdoy>
-        <g:each in="${workers}" var="worker">
+        <g:each in="${workerList}" var="worker">
           <tr>
             <td>
               <g:link action="edit" params="[id: worker.id]">
