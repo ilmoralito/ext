@@ -33,8 +33,11 @@ class BootStrap {
     def grethel = new Worker(fullName:"Grethel Hernandez", email: "grethel.hernandez@ucc.edu.ni").save failOnError: true
     def rider = new Worker(fullName:"Rider Sarria", email: "rider.sarria@ucc.edu.ni").save failOnError: true
     def leonte = new Worker(fullName:"Leonte Paiz", email: "leonte.paiz@ucc.edu.ni").save failOnError: true
+    def juan = new Worker(fullName:"Juan Paiz", email: "juan.paiz@ucc.edu.ni").save failOnError: true
+    def rosalia = new Worker(fullName:"Rosalia Paiz", email: "rosalia.prado@ucc.edu.ni").save failOnError: true
+    def orlando = new Worker(fullName:"Orlando Gaitan", email: "orlando.gaitan@ucc.edu.ni").save failOnError: true
 
-    assert Worker.count() == 17
+    assert Worker.count() == 20
 
     //departments
     def bodega = new Department(name: "Bodega", extensionNumber: 158).save failOnError: true
