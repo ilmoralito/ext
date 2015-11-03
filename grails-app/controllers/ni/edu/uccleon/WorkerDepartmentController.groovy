@@ -65,7 +65,7 @@ class WorkerDepartmentController {
         footer: { info ->
           table(border: [size: 0]) {
             row {
-              cell "Impreso: ${info.dateGenerated.format('yyyy-MM-dd hh:mm')}"
+              cell "Impreso: ${info.dateGenerated.format('yyyy-MM-dd hh:mm')}", align: "center"
             }
           }
         }) 
