@@ -16,20 +16,28 @@
       </thead>
       <tbody>
         <g:each in="${departments}" var="d">
-          <tr>
+          <g:set var="dept" value="${d.name.tokenize(' ').join('_')}"/>
+
+          <tr id="${dept}">
             <td colspan="2">
               <b>${d}</b>
-              <a href="#" class="btn btn-default btn-xs pull-right">+</a>
+              <a
+                href="#"
+                class="btn btn-default btn-xs pull-right create-trigger"
+                data-department="${dept}"
+                >+</a>
             </td>
           </tr>
           <g:each in="${data[d]}" var="v">
             <tr>
-              <td>${v.worker}</td>
+              <td class="${dept}">${v.worker}</td>
               <td>${v.position == "Manager" ? "Director" : "Colaborador"}</td>
             </tr>
           </g:each>
         </g:each>
       </tbody>
     </table>
+
+    <asset:javascript src="application.js"/>
   </content>
 </g:applyLayout>
