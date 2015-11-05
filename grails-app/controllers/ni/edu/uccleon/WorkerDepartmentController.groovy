@@ -9,9 +9,10 @@ class WorkerDepartmentController {
   static defaultAction = "list"
   static allowedMethods = [
     index: "GET",
-    create: ["GET", "POST"],
+    create: "GET",
     printExtencionsList: "GET",
-    list: "GET"
+    list: "GET",
+    update: "GET"
   ]
 
   def index() {
@@ -54,18 +55,25 @@ class WorkerDepartmentController {
   }
 
   @Secured("ROLE_ADMIN")
-  def edit(Integer id) {
-    
-  }
+  def update(Integer id, String department) {
+    def wd = WorkerDepartment.get id
+    def departmentInstance = Department.findByName department.tokenize("_").join(" ")
 
-  @Secured("ROLE_ADMIN")
-  def update(Integer id) {
-    
-  }
+    wd.position = WorkerDepartment.where { department == departmentInstance }.count() ? "Colaborator" : "Manager"
+    wd.department = departmentInstance
+    /*
 
-  @Secured("ROLE_ADMIN")
-  def delete(Integer id) {
-    
+    if (!wd.save()) {
+      dw.errors.allErrors.each { err -> log.error  "[field: $err.field: message: $err.defaultMessage]" }
+    }
+    */
+
+    wd.save()
+
+    render(contentType: 'application/json') {
+      fullName = wd.worker.fullName
+      position = wd.position
+    }
   }
 
   def printExtencionsList() {

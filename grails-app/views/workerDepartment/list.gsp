@@ -18,7 +18,7 @@
         <g:each in="${departments}" var="d">
           <g:set var="dept" value="${d.name.tokenize(' ').join('_')}"/>
 
-          <tr id="${dept}">
+          <tr id="${dept}" class="dropable">
             <td colspan="2">
               <b>${d}</b>
               <a
@@ -29,7 +29,7 @@
             </td>
           </tr>
           <g:each in="${data[d]}" var="v">
-            <tr>
+            <tr id="${v.id}" class="draggable" draggable="true">
               <td class="${dept}">${v.worker}</td>
               <td>${v.position == "Manager" ? "Director" : "Colaborador"}</td>
             </tr>
