@@ -2,28 +2,26 @@
 //= require_tree .
 //= require_self
 
-$(function() {
+(function() {
   $('a.create-trigger').on('click', function(e) {
     e.preventDefault();
-    
-    var dataset = $(this).data();
-    var department = dataset.department;
-    var currentMembers = getCurrentMembersInDepartment(department);
+
+    var department = $(this).data().department;
 
     $.ajax({
-      url: '/worker/index.json',
+      url: '/workerDepartment/getWorkersWithNotWorkerDepartment',
+      dataType: 'json',
       success: function(data) {
-        if (data) {
+        if (data.workersInstances.length) {
           var div = $('<div>', { class: 'col-md-4' });
-          var select = $('<select>', { id: 'workers', class: 'form-control' });
+          var select = $('<select>', { class: 'form-control workers' });
           var tr = $('<tr>');
           var td1 = $('<td>');
           var td2 = $('<td>');
-          var confirmButton = $('<a>', { text: 'Confirm', class: 'btn btn-primary btn-sm', id: 'confirmButton', style: 'margin-right: 5px;' });
-          var cancelButton = $('<a>', { text: 'Cancel', class: 'btn btn-default btn-sm', id: 'cancelButton' });
-          var filteredMembers = filterMembers(data, currentMembers);
+          var confirmButton = $('<a>', { text: 'Confirmar', class: 'btn btn-primary btn-sm confirmButton', 'data-department': department, style: 'margin-right: 5px;' });
+          var cancelButton = $('<a>', { text: 'Cancel', class: 'btn btn-default btn-sm cancelButton' });
 
-          filteredMembers.forEach(function(w) {
+          data.workersInstances.forEach(function(w) {
             var option = $('<option>', { text: w.fullName, value: w.id });
 
             select.append(option);
@@ -37,13 +35,43 @@ $(function() {
           tr.append(td2);
 
           $('#' + department).after(tr)
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        console.log(xhr.status, ajaxOptions, thrownError);
+      }
+    });
+  });
 
-          confirmButton.on('click', function(e) {
+  $(document).on('click', '.confirmButton', function(e) {
+    var _self = $(this);
+    var target = _self.parent().parent().children();
+    var worker = target.first().find('select option:selected').attr("value");
+    var department = _self.data().department;
+
+    $.ajax({
+      url: "/workerDepartment/create",
+      data: { worker: worker, department: department },
+      success: function(data) {
+        if (data) {
+          //update selects > removing worker
+          $('.workers option').each(function() {
+            var _this = $(this);
             
-          })
+            if (_this.html() === data.fullName) {
+              _this.remove();
+            }
+          });
 
-          cancelButton.on('click', function(e) {
-            $(this).parent().parent().remove()
+          //print data in td target
+          target.first().html(data.fullName);
+          target.last().html(data.position == 'Manager' ? 'Manager' : 'Colaborador');
+
+          //remove all .workers if there are no more workers
+          $.getJSON('/workerDepartment/getWorkersWithNotWorkerDepartment', function(data) {
+            if (!data.workersInstances.length) {
+              $('.workers').parent().parent().parent().remove()
+            };
           });
         }
       },
@@ -53,25 +81,7 @@ $(function() {
     });
   });
 
-  var getCurrentMembersInDepartment = function(department) {
-    var members = [];
-
-    $('.' + department).each(function(index) {
-      members.push($(this).text());
-    });
-
-    return members;
-  };
-
-  var filterMembers = function(workers, currentMembers) {
-    var validMembers = [];
-
-    workers.forEach(function(worker) {
-      if (currentMembers.indexOf(worker.fullName) == -1) {
-        validMembers.push(worker);
-      }
-    });
-
-    return validMembers;
-  };
+  $(document).on('click', '.cancelButton', function(e) {
+    $(this).parent().parent().remove()
+  });
 })();

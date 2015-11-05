@@ -30,8 +30,27 @@ class WorkerDepartmentController {
   }
 
   @Secured("ROLE_ADMIN")
-  def create() {
+  def create(Integer worker, String department) {
+    def workerInstance = Worker.get worker
+    def departmentInstance = Department.findByName department.tokenize("_").join(" ")
+    def countOfMembersInDepartment = WorkerDepartment.where { department == departmentInstance }.count()
 
+    def workerDepartment = new WorkerDepartment(
+      worker: workerInstance,
+      department: departmentInstance,
+      position: !countOfMembersInDepartment ? "Manager" : "Collaborator"
+    )
+
+    if (!workerDepartment.save()) {
+      render(contentType: "application/json") {
+        error = "error"
+      }
+    } else {
+      render(contentType: "application/json") {
+        fullName = workerDepartment.worker.fullName
+        position = workerDepartment.position
+      }
+    }
   }
 
   @Secured("ROLE_ADMIN")
@@ -48,7 +67,6 @@ class WorkerDepartmentController {
   def delete(Integer id) {
     
   }
-
 
   def printExtencionsList() {
     def data =  workerDepartmentService.getWorkerDepartmentData()
@@ -127,5 +145,20 @@ class WorkerDepartmentController {
     response.setHeader("Content-disposition", "attachment;filename=test.pdf")
     response.outputStream << out.toByteArray()
     response.outputStream.flush()
+  }
+
+  @Secured("ROLE_ADMIN")
+  def getWorkersWithNotWorkerDepartment() {
+    def workers = Worker.list()
+    def workerDepartment = WorkerDepartment.list().worker
+    def result = workers - workerDepartment
+
+    render(contentType: "application/json") {
+      workersInstances = array {
+        for(w in result) {
+          worker fullName: w.fullName, id: w.id
+        }
+      }
+    }
   }
 }
