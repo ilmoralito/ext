@@ -20,7 +20,7 @@
 
           <tr id="${dept}" class="dropable">
             <td colspan="2">
-              <b>${d}</b>
+              <strong>${d.name.toUpperCase()}</strong>
               <a
                 href="#"
                 class="btn btn-default btn-xs pull-right create-trigger"

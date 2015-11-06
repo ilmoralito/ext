@@ -11,8 +11,8 @@ class WorkerDepartmentController {
     index: "GET",
     list: "GET",
     create: "GET",
-    update: "GET"
-    printExtencionsList: "GET",
+    update: "GET",
+    printExtencionsList: "GET"
   ]
 
   def index() {
@@ -58,11 +58,12 @@ class WorkerDepartmentController {
   def update(Integer id, String department) {
     def wd = WorkerDepartment.get id
     def departmentInstance = Department.findByName department.tokenize("_").join(" ")
+    def count = workerDepartmentService.membersInDepartment(departmentInstance).count()
 
-    wd.position = WorkerDepartment.where { department == departmentInstance }.count() ? "Colaborator" : "Manager"
+    wd.position = count ? "Collaborator" : "Manager"
     wd.department = departmentInstance
-    /*
 
+    /*
     if (!wd.save()) {
       dw.errors.allErrors.each { err -> log.error  "[field: $err.field: message: $err.defaultMessage]" }
     }
