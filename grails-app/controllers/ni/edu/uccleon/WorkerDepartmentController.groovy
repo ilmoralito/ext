@@ -63,12 +63,6 @@ class WorkerDepartmentController {
     wd.position = count ? "Collaborator" : "Manager"
     wd.department = departmentInstance
 
-    /*
-    if (!wd.save()) {
-      dw.errors.allErrors.each { err -> log.error  "[field: $err.field: message: $err.defaultMessage]" }
-    }
-    */
-
     wd.save()
 
     render(contentType: 'application/json') {

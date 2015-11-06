@@ -65,7 +65,7 @@
 
           //print data in td target
           target.first().html(data.fullName);
-          target.last().html(data.position == 'Manager' ? 'Manager' : 'Colaborador');
+          target.last().html(data.position == 'Manager' ? 'Director' : 'Colaborador');
 
           //remove all .workers if there are no more workers
           $.getJSON('/workerDepartment/getWorkersWithNotWorkerDepartment', function(data) {
