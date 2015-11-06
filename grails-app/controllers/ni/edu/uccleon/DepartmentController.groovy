@@ -7,7 +7,9 @@ class DepartmentController {
   static allowedMethods = [
     index: "GET",
     create: ["GET", "POST"],
-    delete: ["GET", "POST"]
+    delete: ["GET", "POST"],
+    edit: "GET",
+    update: "POST"
   ]
 
   def index() {
@@ -38,5 +40,32 @@ class DepartmentController {
     }
 
     [department: department]
+  }
+
+  def edit(Integer id) {
+    def department = Department.get id
+
+    if (!department) {
+      response.sendError 404
+    }
+
+    [department: department]
+  }
+
+  def update(Integer id) {
+    def department = Department.get id
+
+    if (!department) {
+      response.sendError 404
+    }
+
+    department.properties = params
+
+    if (!department.save()) {
+      chain action: "edit", id: id, model: [department: department]
+      return
+    }
+
+    redirect action: "edit", params: [id: id]
   }
 }
