@@ -6,7 +6,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class DepartmentController {
   static allowedMethods = [
     index: "GET",
-    create: ["GET", "POST"]
+    create: ["GET", "POST"],
+    delete: ["GET", "POST"]
   ]
 
   def index() {
@@ -21,5 +22,21 @@ class DepartmentController {
         return [department: department]
       }
     }
+  }
+
+  def delete(Integer id) {
+    def department = Department.get id
+
+    if (!department) {
+      response.sendError 404
+    }
+
+    if (request.method == "POST") {
+      department.delete()
+
+      redirect action: "index"
+    }
+
+    [department: department]
   }
 }
