@@ -1,13 +1,13 @@
 (function() {
-  $('.draggable').on('dragstart', function(event) {
+  $(document).on('dragstart', '.draggable', function(event) {
     event.originalEvent.dataTransfer.setData('text/plain', event.target.id);
   });
 
-  $('.dropable').on('dragover', function(event) {
+  $(document).on('dragover', '.dropable', function(event) {
     event.preventDefault();
   })
 
-  $('.draggable').on('dragend', function(event) {
+  $(document).on('dragend', '.draggable', function(event) {
     var origin = event.target;
 
     if (event.originalEvent.dataTransfer.dropEffect != 'none') {
@@ -15,11 +15,11 @@
     }
   });
 
-  $('.dropable').on('dragenter', function(event) {
+  $(document).on('dragenter', '.dropable', function(event) {
     event.preventDefault();
   })
 
-  $('.dropable').on('drop', function(event) {
+  $(document).on('drop', '.dropable', function(event) {
     event.preventDefault();
 
     var id = event.originalEvent.dataTransfer.getData('text/plain');
@@ -46,8 +46,6 @@
 
         tr.appendChild(tdFullName);
         tr.appendChild(tdPosition);
-
-        console.log(data)
 
         parent.parentNode.insertBefore(tr, parent.nextSibling);
       }
