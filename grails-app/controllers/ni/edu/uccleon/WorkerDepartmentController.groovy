@@ -67,7 +67,7 @@ class WorkerDepartmentController {
 
     render(contentType: 'application/json') {
       fullName = wd.worker.fullName
-      position = wd.position
+      position = wd.position == "Manager" ? "Director" : "Colaborador"
     }
   }
 
