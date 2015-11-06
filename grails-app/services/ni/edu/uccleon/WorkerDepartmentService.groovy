@@ -40,4 +40,8 @@ class WorkerDepartmentService {
       query.list().worker.fullName
     }
   }
+
+  def membersInDepartment(Department department) {
+    WorkerDepartment.where { department == department }
+  }
 }

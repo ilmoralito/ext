@@ -9,10 +9,10 @@ class WorkerDepartmentController {
   static defaultAction = "list"
   static allowedMethods = [
     index: "GET",
-    create: "GET",
-    printExtencionsList: "GET",
     list: "GET",
+    create: "GET",
     update: "GET"
+    printExtencionsList: "GET",
   ]
 
   def index() {
@@ -34,12 +34,12 @@ class WorkerDepartmentController {
   def create(Integer worker, String department) {
     def workerInstance = Worker.get worker
     def departmentInstance = Department.findByName department.tokenize("_").join(" ")
-    def countOfMembersInDepartment = WorkerDepartment.where { department == departmentInstance }.count()
+    def count = workerDepartmentService.membersInDepartment(departmentInstance).count()
 
     def workerDepartment = new WorkerDepartment(
       worker: workerInstance,
       department: departmentInstance,
-      position: !countOfMembersInDepartment ? "Manager" : "Collaborator"
+      position: !count ? "Manager" : "Collaborator"
     )
 
     if (!workerDepartment.save()) {
