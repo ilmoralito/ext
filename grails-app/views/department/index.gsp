@@ -7,15 +7,22 @@
     <g:link action="create" class="btn btn-primary pull-right">Agregar departamento</g:link>
 
     <table class="table table-hover">
+      <colgroup>
+        <col style="width: 1%">
+        <col style="width: 88%">
+        <col style="width: 1%">
+      </colgroup>
       <thead>
         <tr>
+          <th>Ext.</th>
+          <th>Nombre</th>
           <th></th>
-          <th width="1"></th>
         </tr>
       </thead>
       <tbdoy>
         <g:each in="${departmentList}" var="department">
           <tr>
+            <td>${department.extensionNumber}</td>
             <td>
               <g:link action="edit" params="[id: department.id]">
                 ${department.name}
