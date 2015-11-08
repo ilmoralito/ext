@@ -7,7 +7,7 @@ class BootStrap {
     def adminRole = new Role("ROLE_ADMIN").save()
     def userRole = new Role("ROLE_USER").save()
 
-    def testUser = new User("me", "me@ucc.edu.ni", "password").save()
+    def testUser = User.findByUsername("me") ?: new User("me", "me@ucc.edu.ni", "password").save(failOnError: true)
 
     UserRole.create testUser, adminRole, true
 
