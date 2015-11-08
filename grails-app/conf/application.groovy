@@ -25,3 +25,17 @@ ni.edu.uccleon.emergencyNumbers = [
 	police: "126",
 	firefighters: "115"
 ]
+
+environments {
+  production {
+    dataSource {
+      dbCreate = "update"
+      driverClassName = "org.postgresql.Driver"
+      dialect = org.hibernate.dialect.PostgreSQLDialect
+      uri = new URI(System.env.DATABASE_URL?:"postgres://dqhmkllublbmrq:YGskW2tTYZVgK8iJLFYc61k6z8@ec2-107-21-222-62.compute-1.amazonaws.com:5432/d3furb45go30fq")
+      url = "jdbc:postgresql://" + uri.host + ":" + uri.port + uri.path
+      username = uri.userInfo.split(":")[0]
+      password = uri.userInfo.split(":")[1]
+    }
+  }
+}
