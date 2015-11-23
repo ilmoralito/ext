@@ -1,6 +1,6 @@
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.logout.postOnly = false
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/control"
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/workerDepartment/list"
 grails.plugin.springsecurity.userLookup.userDomainClassName = "ni.edu.uccleon.User"
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = "ni.edu.uccleon.UserRole"
 grails.plugin.springsecurity.authority.className = "ni.edu.uccleon.Role"
